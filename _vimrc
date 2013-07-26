@@ -1,7 +1,7 @@
 " -----------------   Author: Ruchee
 " -----------------    Email: my@ruchee.com
 " -----------------  WebSite: http://www.ruchee.com
-" -----------------     Date: 2013-07-26 10:21
+" -----------------     Date: 2013-07-26 18:23
 " -----------------     For Windows, Cygwin and Linux
 
 
@@ -207,8 +207,8 @@ set shiftwidth=4
 set tabstop=4
 
 " 对部分语言设置单独的缩进
-au FileType sh,scheme,lisp set shiftwidth=2
-au FileType sh,scheme,lisp set tabstop=2
+au FileType ruby,eruby,coffee,sh,scheme,lisp set shiftwidth=2
+au FileType ruby,eruby,coffee,sh,scheme,lisp set tabstop=2
 
 " 根据后缀名指定文件类型
 au BufRead,BufNewFile *.txt setlocal ft=txt
@@ -348,6 +348,7 @@ let g:snipMate.scope_aliases           = {}
 let g:snipMate.scope_aliases['c']      = 'cpp'
 let g:snipMate.scope_aliases['php']    = 'php,html'
 let g:snipMate.scope_aliases['smarty'] = 'smarty,html'
+let g:snipMate.scope_aliases['eruby']  = 'eruby,html'
 let g:snipMate.scope_aliases['xhtml']  = 'html'
 
 
@@ -366,10 +367,9 @@ let g:indent_guides_guide_size=1             " 指定对齐线的尺寸
 " Syntastic           语法检查
 let g:syntastic_check_on_open=1              " 默认开启
 let g:syntastic_mode_map={'mode': 'active',
-            \'active_filetypes':  ['c', 'cpp', 'd', 'php', 'javascript', 'sh', 'scheme', 'lisp',
-            \'mysql', 'css', 'xml'],
-            \'passive_filetypes': ['html', 'xhtml', 'smarty']
-            \}                               " 指定默认检查和默认不检查的语言
+            \'active_filetypes':  [],
+            \'passive_filetypes': ['html', 'xhtml', 'smarty', 'eruby']
+            \}                               " 指定默认不检查的语言
 
 
 " ======= 自定义快捷键 ======= "
@@ -450,6 +450,8 @@ func! CompileCode()
         exec "!dmd -wi -unittest %:t"
     elseif &filetype == "php"
         exec "!php %:t"
+    elseif &filetype == "ruby"
+        exec "!ruby %:t"
     elseif &filetype == "sh"
         exec "!bash %:t"
     elseif &filetype == "scheme"
@@ -469,6 +471,8 @@ func! RunCode()
         endif
     elseif &filetype == "php"
         exec "!php %:t"
+    elseif &filetype == "ruby"
+        exec "!ruby %:t"
     elseif &filetype == "sh"
         exec "!bash %:t"
     elseif &filetype == "scheme"
